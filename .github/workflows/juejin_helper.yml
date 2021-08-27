@@ -1,0 +1,36 @@
+name: JueJin_Helper
+
+on:
+  # push:
+  #   branches:
+  #     - main
+  schedule:
+    - cron: "30 21 * * *" # 该时间为UTC时间，比北京时间晚8个小时，每天早上5点半自动执行
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: npm ci
+
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://npm.pkg.github.com/
+      - name: Run Project
+        env:
+          COOKIE: ${{ secrets.COOKIE }}
+          USER: ${{ secrets.USER }}
+          PASS: ${{ secrets.PASS }}
+          TO: ${{ secrets.TO }}
+        run: npm ci && node index.js "${COOKIE}" "${USER}" "${PASS}" "${TO}"
