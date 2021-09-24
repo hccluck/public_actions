@@ -155,14 +155,14 @@ const allDarw = async () => {
             title: '掘金',
             content: `
         <h1 style="text-align: center">自动签到通知</h1>
-        <p style="text-indent: 2em">签到结果：${data.msg}</p>
-        <p style="text-indent: 2em">梭哈结果：${JSON.stringify(data.award)}</p>
+        <p style="text-indent: 2em">签到结果：${data.meiri}</p>
+        <p style="text-indent: 2em">梭哈结果：${JSON.stringify(data.suohua)}</p>
         <p style="text-indent: 2em">当前积分：${score}</p><br/>
         `,
         }).catch(console.error);
     })
     .then(() => {
-        console.log('邮件发送成功！');
+        console.log('PUSHPLUS发送成功！');
     })
     .catch((err) => {
         pushPlus({
