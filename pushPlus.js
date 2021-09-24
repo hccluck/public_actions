@@ -24,13 +24,4 @@ const pushPlus = async (data) => {
     }
 };
 
-pushPlus({
-    title: '掘金',
-    content: `
-<h1 style="text-align: center">自动签到通知</h1>
-<p style="text-indent: 2em">签到结果：成功</p>
-<p style="text-indent: 2em">当前积分：10000</p><br/>
-`,
-}).catch(console.error);
-
 module.exports = pushPlus;
