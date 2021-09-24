@@ -137,7 +137,7 @@ const allDarw = async () => {
         console.log(res);
         score = res.data;
         // 先去免费抽奖
-        // let msg = await drawFn();
+        let msg = await drawFn();
         let award;
         // 是否梭哈
         if (process.env.suoha) {
