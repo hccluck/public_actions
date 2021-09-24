@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 
 const pushPlus = async (data) => {
     const body = {
-        token: process.env.push_plus_token || 'e1c10303f47a45caa2f21ce99d60e090',
+        token: process.env.push_plus_token,
         title: `${data.title}`,
         content: `${data.content}`,
     };
@@ -23,5 +23,21 @@ const pushPlus = async (data) => {
         console.error(error);
     }
 };
+
+//test
+// let awad = {
+//     bug: 10,
+//     抱枕: 10,
+//     其他: 10,
+// };
+// pushPlus({
+//     title: '掘金',
+//     content: `
+// <h1 style="text-align: center">自动签到通知</h1>
+// <p style="text-indent: 2em">签到结果：success</p>
+// <p style="text-indent: 2em">梭哈结果：${JSON.stringify(awad)}</p>
+// <p style="text-indent: 2em">当前积分：10000</p><br/>
+// `,
+// }).catch(console.error);
 
 module.exports = pushPlus;

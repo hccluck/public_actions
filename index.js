@@ -1,8 +1,26 @@
 const fetch = require('node-fetch');
 const pushPlus = require('./pushPlus');
 
-const [cookie, push_plus_token] = process.argv.slice(2);
+let [cookie, push_plus_token, suoha] = process.argv.slice(2);
+if (!cookie) {
+    console.error('请填写掘金cookie');
+    return;
+}
+
+if (!push_plus_token) {
+    console.error('请填写push_plus_token');
+    return;
+}
+
+if (!suoha) {
+    // 默认不梭哈
+    suoha = 0;
+    console.log('没有填写suoha 默认为不梭哈');
+}
+
 process.env.push_plus_token = push_plus_token;
+process.env.suoha = suoha;
+
 let score = 0;
 
 const headers = {
@@ -42,6 +60,49 @@ const drawFn = async () => {
     return Promise.resolve(`签到成功！恭喜抽到：${draw.data.lottery_name}`);
 };
 
+// 梭哈 一次抽完
+const allDarw = async () => {
+    if (score < 200) {
+        console.warn('分都不够想啥呢？');
+        return '分都不够想啥呢？';
+    }
+    let award = {};
+    let flag = true;
+
+    console.log('开始梭哈！');
+    while (flag) {
+        if (score < 200) {
+            console.log('梭哈结束！');
+            console.table(award);
+            flag = false;
+            return award;
+        }
+        const result = await fetch('https://api.juejin.cn/growth_api/v1/lottery/draw', {
+            headers,
+            method: 'POST',
+            credentials: 'include',
+        }).then((res) => res.json());
+
+        if (result.err_no !== 0) {
+            console.log('梭哈结束！');
+            console.table(award);
+            flag = false;
+            return award;
+        }
+
+        score -= 200;
+
+        if (result.data.lottery_type === 1) score += 66;
+
+        if (award[result.data.lottery_name]) award[result.data.lottery_name]++;
+        else award[result.data.lottery_name] = 1;
+
+        console.log(`获得：${result.data.lottery_name}`);
+    }
+
+    return award;
+};
+
 // 签到
 (async () => {
     // 查询今日是否已经签到
@@ -72,21 +133,32 @@ const drawFn = async () => {
             credentials: 'include',
         }).then((res) => res.json());
     })
-    .then((res) => {
+    .then(async (res) => {
         console.log(res);
         score = res.data;
-        return drawFn();
+        // 先去免费抽奖
+        // let msg = await drawFn();
+        let award;
+        // 是否梭哈
+        if (process.env.suoha) {
+            award = await allDarw();
+        }
+        return {
+            meiri: msg,
+            suohua: award,
+        };
     })
-    .then((msg) => {
-        console.log(msg);
+    .then((data) => {
+        console.log(data);
 
         return pushPlus({
             title: '掘金',
             content: `
         <h1 style="text-align: center">自动签到通知</h1>
-        <p style="text-indent: 2em">签到结果：${msg}</p>
+        <p style="text-indent: 2em">签到结果：${data.msg}</p>
+        <p style="text-indent: 2em">梭哈结果：${JSON.stringify(data.award)}</p>
         <p style="text-indent: 2em">当前积分：${score}</p><br/>
-      `,
+        `,
         }).catch(console.error);
     })
     .then(() => {
@@ -99,6 +171,6 @@ const drawFn = async () => {
         <h1 style="text-align: center">自动签到通知</h1>
         <p style="text-indent: 2em">执行结果：${err}</p>
         <p style="text-indent: 2em">当前积分：${score}</p><br/>
-      `,
+        `,
         }).catch(console.error);
     });
