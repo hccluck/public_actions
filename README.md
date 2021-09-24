@@ -1,13 +1,14 @@
-## 定时任务脚本
+# 定时任务脚本
 
-掘金自动签到 签到后会获得一次免费抽奖机会，自动触发免费抽奖。
-执行结束发送PUSHPLUS通知签到结果。
-增加梭哈选项
+- 掘金自动签到 签到后会获得一次免费抽奖机会，自动触发免费抽奖。
+- 执行结束发送PUSHPLUS通知签到结果。
+- 增加梭哈选项
+![大佬](https://ghproxy.com/https://raw.githubusercontent.com/xiaojia21190/my_blog/main/images/wallhaven-8oky1j.jpg)
+***
+>使用方法：fork 本仓库
 
-使用方法：fork 本仓库
-
-打开浏览器，登陆掘金，F12 查看 Network 面板，复制 cookie
-
+>打开浏览器，登陆掘金，F12 查看 Network 面板，复制 cookie
+***
 打开 github 仓库的 Setting，选择 Secrets，新建下列 3 个仓库 Secret
 | key             | value                               |
 | --------------- | ----------------------------------- |
