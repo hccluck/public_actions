@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 
 const pushPlus = async (data) => {
     const body = {
-        token: process.env.PUSH_PLUS_TOKEN || 'e1c10303f47a45caa2f21ce99d60e090',
+        token: process.env.push_plus_token || 'e1c10303f47a45caa2f21ce99d60e090',
         title: `${data.title}`,
         content: `${data.content}`,
     };

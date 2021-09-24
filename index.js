@@ -1,9 +1,8 @@
 const fetch = require('node-fetch');
 const pushPlus = require('./pushPlus');
 
-const [cookie, user, pass, to] = process.argv.slice(2);
-process.env.user = user;
-process.env.pass = pass;
+const [cookie, push_plus_token] = process.argv.slice(2);
+process.env.push_plus_token = push_plus_token;
 let score = 0;
 
 const headers = {
