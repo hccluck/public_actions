@@ -17,9 +17,9 @@ if (!suoha) {
     suoha = 0;
     console.log('没有填写suoha 默认为不梭哈');
 }
-
-process.env.push_plus_token = push_plus_token;
-process.env.suoha = suoha;
+// test
+// process.env.push_plus_token = push_plus_token;
+// process.env.suoha = suoha;
 
 let score = 0;
 
@@ -140,7 +140,7 @@ const allDarw = async () => {
         let msg = await drawFn();
         let award;
         // 是否梭哈
-        if (process.env.suoha) {
+        if (suoha) {
             award = await allDarw();
         }
         return {
