@@ -151,26 +151,32 @@ const allDarw = async () => {
     .then((data) => {
         console.log(data);
 
-        return pushPlus({
-            title: '掘金',
-            content: `
+        return pushPlus(
+            {
+                title: '掘金',
+                content: `
         <h1 style="text-align: center">自动签到通知</h1>
         <p style="text-indent: 2em">签到结果：${data.meiri}</p>
         <p style="text-indent: 2em">梭哈结果：${JSON.stringify(data.suohua)}</p>
         <p style="text-indent: 2em">当前积分：${score}</p><br/>
         `,
-        }).catch(console.error);
+            },
+            push_plus_token
+        ).catch(console.error);
     })
     .then(() => {
         console.log('PUSHPLUS发送成功！');
     })
     .catch((err) => {
-        pushPlus({
-            title: '掘金',
-            content: `
+        pushPlus(
+            {
+                title: '掘金',
+                content: `
         <h1 style="text-align: center">自动签到通知</h1>
         <p style="text-indent: 2em">执行结果：${err}</p>
         <p style="text-indent: 2em">当前积分：${score}</p><br/>
         `,
-        }).catch(console.error);
+            },
+            push_plus_token
+        ).catch(console.error);
     });

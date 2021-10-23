@@ -1,8 +1,8 @@
 const fetch = require('node-fetch');
 
-const pushPlus = async (data) => {
+const pushPlus = async (data, push_plus_token) => {
     const body = {
-        token: process.env.push_plus_token,
+        token: push_plus_token,
         title: `${data.title}`,
         content: `${data.content}`,
     };
