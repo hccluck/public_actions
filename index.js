@@ -31,16 +31,16 @@ const drawFn = async () => {
   if (today.data.free_count === 0) return Promise.resolve('签到成功！今日已经免费抽奖！');
 
   // 免费抽奖
-//   const draw = await fetch('https://api.juejin.cn/growth_api/v1/lottery/draw', {
-//     headers,
-//     method: 'POST',
-//     credentials: 'include'
-//   }).then((res) => res.json());
+   const draw = await fetch('https://api.juejin.cn/growth_api/v1/lottery/draw', {
+     headers,
+     method: 'POST',
+     credentials: 'include'
+   }).then((res) => res.json());
 
-//   if (draw.err_no !== 0) return Promise.reject('已经签到！免费抽奖异常！');
-//   console.log(JSON.stringify(draw, null, 2));
-//   if (draw.data.lottery_type === 1) score += 66;
-//   return Promise.resolve(`签到成功！恭喜抽到：${draw.data.lottery_name}`);
+   if (draw.err_no !== 0) return Promise.reject('已经签到！免费抽奖异常！');
+   console.log(JSON.stringify(draw, null, 2));
+   if (draw.data.lottery_type === 1) score += 66;
+   return Promise.resolve(`签到成功！恭喜抽到：${draw.data.lottery_name}`);
 };
 
 // 签到
