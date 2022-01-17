@@ -2,10 +2,10 @@ const fetch = require('node-fetch');
 const sign_in = require('./src/signIn');
 const draw = require('./src/draw');
 const dipLucky = require('./src/dipLucky');
-const { headers, webhook, phone } = require('./src/config');
-const axios = require('axios')
-
-  async function startProcess(){
+const { headers, webhook, phone, access_token, touser, agentid } = require('./src/config');
+const axios = require('axios');
+const wx_url = `https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${access_token}`;
+  (async ()=>{
     let sign_res = '';
 
     try {
@@ -61,6 +61,20 @@ const axios = require('axios')
     } catch (error) {
       console.log(error)
     }
-  };
-(async ()=>await startProcess())();
-
+    try {
+      await axios.post(wx_url, {
+        "touser": touser,
+        "agentid": agentid,
+        "msgtype": "textcard",
+        "textcard": {
+          "title": '掘金定时任务',
+          "description": `<div>签到结果：${sign_res}</div><div>抽奖结果：${draw_res}</div><div>沾喜气结果：${dip_res}</div><div>当前矿石：${data}</div>`,
+          "url": "URL",
+          "btntxt": "点击没用"
+        }
+      }).then(res => {
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  })();
