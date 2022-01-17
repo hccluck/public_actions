@@ -32,4 +32,7 @@ jobs:
           COOKIE: ${{ secrets.COOKIE }}
           WEBHOOK: ${{ secrets.WEBHOOK }}
           PHONE: ${{ secrets.PHONE }}
-        run: npm ci && npm i axios && node index.js "${COOKIE}" "${WEBHOOK}" "${PHONE}"
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          TOUSER: ${{ secrets.TOUSER }}
+          AGENTID: ${{ secrets.AGENTID }}
+        run: npm ci && npm i axios && node index.js "${COOKIE}" "${WEBHOOK}" "${PHONE}" "${ACCESS_TOKEN}" "${TOUSER}" "${AGENTID}"
