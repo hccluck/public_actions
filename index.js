@@ -5,7 +5,7 @@ const dipLucky = require('./src/dipLucky');
 const { headers, webhook, phone } = require('./src/config');
 const axios = require('axios')
 
-  (async () => {
+  async function startProcess(){
     let sign_res = '';
 
     try {
@@ -61,6 +61,6 @@ const axios = require('axios')
     } catch (error) {
       console.log(error)
     }
-  })();
-
+  };
+(async ()=>await startProcess())();
 
