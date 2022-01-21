@@ -63,10 +63,9 @@ const axios = require('axios');
     
     try {
       const gettokenURL = `https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=${corpid}&corpsecret=${corpsecret}`
-      let access_token = null
-      const token = await axios.post(gettokenURL)
-      console.log('窝草',token)
-    const wx_url = `https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${access_token}`;
+      await axios.post(gettokenURL).then(res=>{
+           console.log('窝草',res.access_token)
+            const wx_url = `https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${res.access_token}`;
       await axios.post(wx_url, {
         "touser": touser,
         "agentid": agentid,
@@ -82,4 +81,5 @@ const axios = require('axios');
     } catch (error) {
       console.log('推送错误',error)
     }
+      })
   })();
