@@ -74,8 +74,8 @@ const axios = require('axios');
       
     }
     try {
-      
-      axios.post(wx_url, {
+      console.log('的境外哦',wx_url)
+      await axios.post(wx_url, {
               "touser": touser,
               "agentid": agentid,
               "msgtype": "textcard",
