@@ -2,9 +2,8 @@ const fetch = require('node-fetch');
 const sign_in = require('./src/signIn');
 const draw = require('./src/draw');
 const dipLucky = require('./src/dipLucky');
-const { headers, webhook, phone, access_token, touser, agentid } = require('./src/config');
+const { headers, webhook, phone, corpid,corpsecret, touser, agentid } = require('./src/config');
 const axios = require('axios');
-const wx_url = `https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${access_token}`;
   (async ()=>{
     let sign_res = '';
 
@@ -61,6 +60,17 @@ const wx_url = `https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${
     } catch (error) {
       console.log(error)
     }
+    const gettokenURL = `https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=${corpid}&corpsecret=${corpsecret}`
+    let access_token = null
+    try {
+      await axios.post(gettokenURL).then(res => {
+        access_token = res.access_token
+      })
+      
+    } catch (error){
+      console.log('获取access_token错误',error)
+    }
+    const wx_url = `https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${access_token}`;
     try {
       await axios.post(wx_url, {
         "touser": touser,
@@ -75,6 +85,6 @@ const wx_url = `https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${
       }).then(res => {
       })
     } catch (error) {
-      console.log(error)
+      console.log('推送错误',error)
     }
   })();
