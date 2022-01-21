@@ -65,6 +65,7 @@ const axios = require('axios');
     try {
       await axios.post(gettokenURL).then(res => {
         access_token = res.access_token
+        console.log('token:',access_token)
       })
       
     } catch (error){
