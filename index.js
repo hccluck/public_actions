@@ -63,22 +63,23 @@ const axios = require('axios');
     }
     try {
       const gettokenURL = `https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=ww777712c027a9d7e5&corpsecret=ijmTDi2by1NeXxnAsKGweDvnKNG_WvyOEudeuEz9KB0`
-        const token_ = await axios.get(gettokenURL)
-             console.log('窝草',token_.data)
-             const wx_url = `https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${token_.data.access_token}`;
-      console.log('的境外哦',wx_url)
-      await axios.post(wx_url, {
-              "touser": touser,
-              "agentid": agentid,
-              "msgtype": "textcard",
-              "textcard": {
-                "title": '掘金定时任务',
-                "description": `<div>签到结果：${sign_res}</div><div>抽奖结果：${draw_res}</div><div>沾喜气结果：${dip_res}</div><div>当前矿石：${data}</div>`,
-                "url": "URL",
-                "btntxt": "点击没用"
-              }
-            }).then(res => {
-            })
+         await axios.get(gettokenURL).then(async res=>{
+             console.log('窝草',res.data)
+             const wx_url = `https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${res.data.access_token}`;
+             console.log('的境外哦',wx_url)
+             await axios.post(wx_url, {
+                "touser": touser,
+                "agentid": agentid,
+                "msgtype": "textcard",
+                "textcard": {
+                  "title": '掘金定时任务',
+                  "description": `<div>签到结果：${sign_res}</div><div>抽奖结果：${draw_res}</div><div>沾喜气结果：${dip_res}</div><div>当前矿石：${data}</div>`,
+                  "url": "URL",
+                  "btntxt": "点击没用"
+                }
+              }).then(res => {
+              })
+        })
     } catch (error) {
       console.log('推送错误',error)
     }
