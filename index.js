@@ -65,14 +65,9 @@ const axios = require('axios');
     try{
       
         const gettokenURL = `https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=ww777712c027a9d7e5&corpsecret=ijmTDi2by1NeXxnAsKGweDvnKNG_WvyOEudeuEz9KB0`
-        await axios.get(gettokenURL).then(res=>{
+        const token = await axios.get(gettokenURL)
              console.log('窝草',res.data)
-             wx_url = `https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${res.data.access_token}`;
-
-        })
-    } catch(err){
-      
-    }
+             wx_url = `https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${token.data.access_token}`;
     try {
       console.log('的境外哦',wx_url)
       await axios.post(wx_url, {
