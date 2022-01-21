@@ -66,20 +66,20 @@ const axios = require('axios');
       await axios.post(gettokenURL).then(async res=>{
            console.log('窝草',res.access_token)
             const wx_url = `https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${res.access_token}`;
-      await axios.post(wx_url, {
-        "touser": touser,
-        "agentid": agentid,
-        "msgtype": "textcard",
-        "textcard": {
-          "title": '掘金定时任务',
-          "description": `<div>签到结果：${sign_res}</div><div>抽奖结果：${draw_res}</div><div>沾喜气结果：${dip_res}</div><div>当前矿石：${data}</div>`,
-          "url": "URL",
-          "btntxt": "点击没用"
-        }
-      }).then(res => {
+            await axios.post(wx_url, {
+              "touser": touser,
+              "agentid": agentid,
+              "msgtype": "textcard",
+              "textcard": {
+                "title": '掘金定时任务',
+                "description": `<div>签到结果：${sign_res}</div><div>抽奖结果：${draw_res}</div><div>沾喜气结果：${dip_res}</div><div>当前矿石：${data}</div>`,
+                "url": "URL",
+                "btntxt": "点击没用"
+              }
+            }).then(res => {
+            })
       })
     } catch (error) {
       console.log('推送错误',error)
     }
-      })
   })();
