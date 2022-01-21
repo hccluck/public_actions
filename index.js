@@ -3,7 +3,6 @@ const sign_in = require('./src/signIn');
 const draw = require('./src/draw');
 const dipLucky = require('./src/dipLucky');
 const { headers, webhook, phone, corpid,corpsecret, touser, agentid } = require('./src/config');
-console.log('奥利偶尔',corpid)
 const axios = require('axios');
   (async ()=>{
     let sign_res = '';
@@ -64,7 +63,7 @@ const axios = require('axios');
     
     try {
       const gettokenURL = `https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=${corpid}&corpsecret=${corpsecret}`
-      await axios.post(gettokenURL).then(async res=>{
+      await axios.get(gettokenURL).then(async res=>{
            console.log('窝草',res)
             const wx_url = `https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${res.access_token}`;
             await axios.post(wx_url, {
