@@ -60,19 +60,13 @@ const axios = require('axios');
     } catch (error) {
       console.log(error)
     }
-    const gettokenURL = `https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=${corpid}&corpsecret=${corpsecret}`
-    let access_token = null
+    
     try {
-      await axios.post(gettokenURL).then(res => {
-        access_token = res.access_token
-        console.log('获取token值:',access_token)
-      })
-      
-    } catch (error){
-      console.log('获取access_token错误',error)
-    }
+      const gettokenURL = `https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=${corpid}&corpsecret=${corpsecret}`
+      let access_token = null
+      const token = await axios.post(gettokenURL)
+      console.log('窝草',token)
     const wx_url = `https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${access_token}`;
-    try {
       await axios.post(wx_url, {
         "touser": touser,
         "agentid": agentid,
