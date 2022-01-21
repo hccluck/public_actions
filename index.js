@@ -63,7 +63,7 @@ const axios = require('axios');
     
     try {
       const gettokenURL = `https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=${corpid}&corpsecret=${corpsecret}`
-      await axios.post(gettokenURL).then(res=>{
+      await axios.post(gettokenURL).then(async res=>{
            console.log('窝草',res.access_token)
             const wx_url = `https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${res.access_token}`;
       await axios.post(wx_url, {
