@@ -63,11 +63,13 @@ const axios = require('axios');
     }
     try {
       const gettokenURL = `https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=ww777712c027a9d7e5&corpsecret=ijmTDi2by1NeXxnAsKGweDvnKNG_WvyOEudeuEz9KB0`
-         await axios.get(gettokenURL).then(async res=>{
-             console.log('窝草',res.data)
+         await axios.get(gettokenURL).then( res=>{
              const wx_url = `https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${res.data.access_token}`;
              console.log('的境外哦',wx_url)
-             await axios.post(wx_url, {
+           return wx_url
+         }).then(url=>{
+             console.log('窝草',url)
+           axios.post(url, {
                 "touser": touser,
                 "agentid": agentid,
                 "msgtype": "textcard",
@@ -78,8 +80,8 @@ const axios = require('axios');
                   "btntxt": "点击没用"
                 }
               }).then(res => {
-              })
-        })
+            })
+         })
     } catch (error) {
       console.log('推送错误',error)
     }
