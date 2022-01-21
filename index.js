@@ -67,9 +67,9 @@ const axios = require('axios');
              const wx_url = `https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${res.data.access_token}`;
              console.log('的境外哦',wx_url)
            return wx_url
-         }).then(url=>{
+         }).then(async url=>{
              console.log('窝草',url)
-           axios.post(url, {
+           await axios.post(url, {
                 "touser": touser,
                 "agentid": agentid,
                 "msgtype": "textcard",
