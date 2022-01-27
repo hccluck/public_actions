@@ -1,11 +1,8 @@
+const { headers } = require('../config');
 const got = require('got')
 const jwt = require('jsonwebtoken')
 
 const GET_TOKEN_URL = 'https://juejin.cn/get/token'
-const HEADER = {
-  'user-agent':
-  'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36'
-}
 
 const HOST_BASE = 'https://juejin-game.bytedance.com/game/sea-gold'
 const START_GAME_URL = HOST_BASE + '/game/start?'
@@ -42,6 +39,36 @@ class Game {
   }
 
   /**
+   * @desc 启动游戏
+   * @returns {Boolean} 是否启动成功
+   */
+   openGame = async () => {
+    // 1.获取授权
+    let res = await this.#getToken().json()
+    this.#authorization = 'Bearer ' + res.data
+
+    // 2.获取用户名
+    res = await this.#getInfo().json()
+    this.#username = res.data.userInfo.name
+    const gameStatus = res.data.gameStatus
+
+    // 3.登录游戏
+    await this.#loginGame().json()
+
+    if (gameStatus !== 0) {
+      // 如果已经在游戏中那么先退出游戏
+      await this.outGame()
+    }
+
+    // 4.开始游戏，获取游戏id
+    res = await this.#startGame(ROLE_LIST.CLICK).json()
+    this.#gameId = res.data.gameId
+
+    // 5.游戏启动成功返回游戏信息
+    return this.#gameId !== undefined ? res.data : undefined
+  }
+
+  /**
    * @desc 获取authorization授权
    * @returns
    */
@@ -52,7 +79,7 @@ class Game {
         beforeRequest: [
           options => {
             Object.assign(options.headers, {
-              ...HEADER,
+              ...headers,
               cookie
             })
           }
@@ -73,7 +100,7 @@ class Game {
         beforeRequest: [
           options => {
             Object.assign(options.headers, {
-              ...HEADER,
+              ...headers,
               authorization: authorization
             })
           }
@@ -95,7 +122,7 @@ class Game {
         beforeRequest: [
           options => {
             Object.assign(options.headers, {
-              ...HEADER,
+              ...headers,
               authorization: authorization
             })
           }
@@ -118,7 +145,7 @@ class Game {
         beforeRequest: [
           options => {
             Object.assign(options.headers, {
-              ...HEADER,
+              ...headers,
               authorization: authorization
             })
           }
@@ -143,7 +170,7 @@ class Game {
         beforeRequest: [
           options => {
             Object.assign(options.headers, {
-              ...HEADER,
+              ...headers,
               authorization: authorization,
               'x-tt-gameid': xttgameid
             })
@@ -189,7 +216,7 @@ class Game {
         beforeRequest: [
           options => {
             Object.assign(options.headers, {
-              ...HEADER,
+              ...headers,
               authorization: authorization
             })
           }
@@ -211,7 +238,7 @@ class Game {
         beforeRequest: [
           options => {
             Object.assign(options.headers, {
-              ...HEADER,
+              ...headers,
               authorization: authorization
             })
           }
@@ -219,36 +246,6 @@ class Game {
       },
       json: body
     })
-  }
-
-  /**
-   * @desc 启动游戏
-   * @returns {Boolean} 是否启动成功
-   */
-  openGame = async () => {
-    // 1.获取授权
-    let res = await this.#getToken().json()
-    this.#authorization = 'Bearer ' + res.data
-
-    // 2.获取用户名
-    res = await this.#getInfo().json()
-    this.#username = res.data.userInfo.name
-    const gameStatus = res.data.gameStatus
-
-    // 3.登录游戏
-    await this.#loginGame().json()
-
-    if (gameStatus !== 0) {
-      // 如果已经在游戏中那么先退出游戏
-      await this.outGame()
-    }
-
-    // 4.开始游戏，获取游戏id
-    res = await this.#startGame(ROLE_LIST.CLICK).json()
-    this.#gameId = res.data.gameId
-
-    // 5.游戏启动成功返回游戏信息
-    return this.#gameId !== undefined ? res.data : undefined
   }
 }
 

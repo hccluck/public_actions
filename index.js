@@ -4,7 +4,7 @@ const dipLucky = require('./src/dipLucky');
 const sendMail = require('./src/sendMail');
 const getPoint = require('./src/getPoint');
 
-const { autoGame } = require('./src/game/autoGame');
+const { autoGame } = require('./src/games/autoRun');
 
 (async () => {
   // 上次分数
