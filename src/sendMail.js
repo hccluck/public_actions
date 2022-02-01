@@ -6,7 +6,7 @@
 
 const nodemailer = require('nodemailer');
 
-const { user, pass, to } = require('./config');
+const { user, pass, to, smtp_host } = require('./config');
 
 const sendMail = async (data) => {
   if (!user || !pass) return Promise.reject('未配置邮箱账号密码！！！');
@@ -19,7 +19,7 @@ const sendMail = async (data) => {
   if (!EmailReg.test(user)) return Promise.reject('未正确配置邮箱账号格式！！！');
 
   try {
-    const [, type] = user.split('@');
+    const [, type] = smtp_host || user.split('@');
 
     transporter = nodemailer.createTransport({
       host: `smtp.${type || 'qq.com'}`,
