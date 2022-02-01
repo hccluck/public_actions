@@ -12,4 +12,4 @@ const headers = {
   cookie
 };
 
-module.exports = { headers, user, pass, to, uid };
+module.exports = { headers, user, pass, to, uid, smtp_host };
