@@ -67,7 +67,7 @@ const axios = require('axios');
       console.log('推送错误',error)
     }
     try {
-      const url = `https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${getAccess_token.data.access_token`
+      const url = `https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${getAccess_token.data.access_token}`
       console.log('获取到的发送微信地址：'，url)
       await axios.post(url, {
                 "touser": touser,
