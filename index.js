@@ -3,7 +3,6 @@ const sign_in = require('./src/signIn');
 const draw = require('./src/draw');
 const dipLucky = require('./src/dipLucky');
 const { headers, webhook, phone, corpid,corpsecret, touser, agentid } = require('./src/config');
-console.log('草拟吗',corpsecret,phone, corpid, touser, agentid)
 const axios = require('axios');
   (async ()=>{
     let sign_res = '';
@@ -60,16 +59,15 @@ const axios = require('axios');
       })
     } catch (error) {
       console.log(error)
-    }
+    };
     try {
       const gettokenURL = `https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=ww777712c027a9d7e5&corpsecret=ijmTDi2by1NeXxnAsKGweDvnKNG_WvyOEudeuEz9KB0`
-         await axios.get(gettokenURL).then( res=>{
-             const wx_url = `https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${res.data.access_token}`;
-             console.log('的境外哦',wx_url)
-           return wx_url
-         }).then(async url=>{
-             console.log('窝草',url)
-           await axios.post(url, {
+         var getAccess_token = await axios.get(gettokenURL)
+    } catch (error) {
+      console.log('推送错误',error)
+    }
+    try {
+      await axios.post(`https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${getAccess_token.data.access_token}`, {
                 "touser": touser,
                 "agentid": agentid,
                 "msgtype": "textcard",
@@ -81,8 +79,7 @@ const axios = require('axios');
                 }
               }).then(res => {
             })
-         })
-    } catch (error) {
-      console.log('推送错误',error)
+    } catch (error){
+    
     }
   })();
