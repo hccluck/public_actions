@@ -65,10 +65,10 @@ const axios = require('axios');
          var getAccess_token = await axios.get(gettokenURL)
     } catch (error) {
       console.log('推送错误',error)
-    }
+    };
     try {
-      const url = `https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${getAccess_token.data.access_token}`
-      console.log('获取到的发送微信地址：'，url)
+      const url = `https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${getAccess_token.data.access_token}`;
+      console.log("获取到的地址"，url);
       await axios.post(url, {
                 "touser": touser,
                 "agentid": agentid,
@@ -80,8 +80,8 @@ const axios = require('axios');
                   "btntxt": "点击没用"
                 }
               }).then(res => {
-            })
+            });
     } catch (error){
     
-    }
+    };
   })();
