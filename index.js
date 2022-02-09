@@ -3,7 +3,6 @@ const sign_in = require('./src/signIn');
 const draw = require('./src/draw');
 const dipLucky = require('./src/dipLucky');
 const { headers, webhook, phone, corpid,corpsecret, touser, agentid } = require('./src/config');
-console.log('环境值1')
 const axios = require('axios');
   (async ()=>{
     let sign_res = '';
