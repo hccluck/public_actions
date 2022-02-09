@@ -1,7 +1,7 @@
 {
   "name": "public_actions",
   "version": "1.0.0",
-  "description": "定时任务 自动签到 自动抽奖",
+  "description": "定时任务 自动签到 自动抽奖 自动粘喜气 自动游戏挖矿",
   "main": "index.js",
   "scripts": {
     "serve": "node index.js"
@@ -11,14 +11,16 @@
     "url": "git+https://github.com/hccluck/public_actions.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "hccluck",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/hccluck/public_actions/issues"
   },
   "homepage": "https://github.com/hccluck/public_actions#readme",
   "dependencies": {
-    "node-fetch": "^2.6.1",
+    "got": "^11.8.2",
+    "jsonwebtoken": "^8.5.1",
+    "node-fetch": "^2.6.7",
     "nodemailer": "^6.6.3"
   }
 }
