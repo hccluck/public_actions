@@ -41,25 +41,6 @@ const axios = require('axios');
     }
 
     console.log(dip_res);
-
-    try {
-      await axios.post(webhook, {
-        msgtype: "markdown",
-        markdown: {
-          title: "掘金",
-          text: `### 掘金任务结果 @${phone} \n > #### 签到结果：${sign_res} \n > #### 抽奖结果：${draw_res} \n > #### 沾喜气结果：${dip_res} \n > #### 当前矿石：${data} \n`
-        },
-        at: {
-          atMobiles: [
-            "'" + phone + "'"
-          ]
-        }
-      }).then(res => {
-        console.log(res)
-      })
-    } catch (error) {
-      console.log(error)
-    };
     try {
       const gettokenURL = `https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=ww777712c027a9d7e5&corpsecret=ijmTDi2by1NeXxnAsKGweDvnKNG_WvyOEudeuEz9KB0`
          var getAccess_token = await axios.get(gettokenURL)
@@ -82,6 +63,6 @@ const axios = require('axios');
               }).then(res => {
             });
     } catch (error){
-    
+      console.log('发送失败error',error)
     };
   })();
