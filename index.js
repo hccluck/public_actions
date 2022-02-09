@@ -61,6 +61,7 @@ const axios = require('axios');
                   "btntxt": "点击没用"
                 }
               }).then(res => {
+              console.log('发送成功！',res.data)
             });
     } catch (error){
       console.log('发送失败error',error)
