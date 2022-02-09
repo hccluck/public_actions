@@ -4,7 +4,7 @@
   "description": "定时任务 自动签到 自动抽奖 自动粘喜气 自动游戏挖矿",
   "main": "index.js",
   "scripts": {
-    "serve": "set DD_BOT_TOKEN=e6fb8ba78da1bf27c17aa233d43356ed937daf1c82df406fd579440c3da9a1be&& node index.js"
+    "serve": "node index.js"
   },
   "repository": {
     "type": "git",
