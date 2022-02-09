@@ -68,21 +68,24 @@ const { autoGame } = require('./src/games/autoRun');
 
     await sendMail({ from: '掘金', subject: '定时任务', html });
 
-    console.log('邮件发送成功！');
+    console.log('邮件发送完成');
   } catch (error) {
     console.error(error);
   }
 
   try {
     const msg = `自动签到通知:
-    当前矿石：${now_score},
-    签到结果：${sign_res},
-    抽奖结果：${draw_res},
-    沾喜气结果：${dip_res},
-    游戏结果：${game_res},
-    较昨日增长：${now_score - yesterday_score},
-  `;
-    await sendDingTalk(msg)
+      沾喜气结果：${dip_res}
+      当前矿石：${now_score}
+      较昨日增长：${now_score - yesterday_score}
+      签到结果：${sign_res}
+      抽奖结果：${draw_res}
+      游戏结果：${game_res}
+    `;
+
+    await sendDingTalk(msg);
+
+    console.log('钉钉机器人通知完成');
   } catch (error) {
     console.error(error);
   }
