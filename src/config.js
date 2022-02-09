@@ -1,4 +1,4 @@
-const [cookie, webhook, phone, corpsecret, touser, agentid,corpid] = process.argv.slice(2);
+const [cookie, webhook, phone, corpsecret,corpid, touser, agentid] = process.argv.slice(2);
 
 const headers = {
   'content-type': 'application/json; charset=utf-8',
