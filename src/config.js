@@ -1,4 +1,4 @@
-const [cookie, webhook, phone, corpsecret,corpid, touser, agentid] = process.argv.slice(2);
+const [cookie, uid, phone, secret, corpid, touser, agentid] = process.argv.slice(2);
 
 const headers = {
   'content-type': 'application/json; charset=utf-8',
@@ -12,6 +12,6 @@ const headers = {
   cookie
 };
 
-module.exports = { headers, webhook, phone,corpsecret, touser, agentid,corpid };
+module.exports = { headers, uid, phone, secret, touser, agentid, corpid };
 
 

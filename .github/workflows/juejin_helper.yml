@@ -35,6 +35,6 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           TOUSER: ${{ secrets.TOUSER }}
           AGENTID: ${{ secrets.AGENTID }}
-          CORPSECRET: ${{ secrets.CORPSECRET }}
+          SECRET: ${{ secrets.SECRET }}
           CORPID: ${{ secrets.CORPID }}
-        run: npm ci && npm i axios && node index.js "${COOKIE}" "${WEBHOOK}" "${PHONE}" "${CORPSECRET}" "${CORPID}" "${TOUSER}" "${AGENTID}" 
+        run: npm ci && npm i axios && node index.js "${COOKIE}" "${UID}" "${PHONE}" "${SECRET}" "${CORPID}" "${TOUSER}" "${AGENTID}" 
