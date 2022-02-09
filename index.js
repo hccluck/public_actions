@@ -3,6 +3,7 @@ const sign_in = require('./src/signIn');
 const draw = require('./src/draw');
 const dipLucky = require('./src/dipLucky');
 const { headers, webhook, phone, corpid,corpsecret, touser, agentid } = require('./src/config');
+console.log('环境值',touser,agentid)
 const axios = require('axios');
   (async ()=>{
     let sign_res = '';
@@ -49,7 +50,6 @@ const axios = require('axios');
     };
     try {
       const url = `https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${getAccess_token.data.access_token}`;
-      console.log("获取到的地址",url);
       await axios.post(url, {
                 "touser": touser,
                 "agentid": agentid,
@@ -61,7 +61,7 @@ const axios = require('axios');
                   "btntxt": "点击没用"
                 }
               }).then(res => {
-              console.log('发送成功！',res.data)
+              console.log('发送结果：',res.data)
             });
     } catch (error){
       console.log('发送失败error',error)
