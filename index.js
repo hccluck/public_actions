@@ -68,7 +68,7 @@ const axios = require('axios');
     };
     try {
       const url = `https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${getAccess_token.data.access_token}`;
-      console.log("获取到的地址"，url);
+      console.log("获取到的地址",url);
       await axios.post(url, {
                 "touser": touser,
                 "agentid": agentid,
