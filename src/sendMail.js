@@ -21,6 +21,7 @@ const sendMail = async (data) => {
   try {
     console.log("host: " + smtp_host );
     console.log("user: " + user);
+    console.log("to: " + to);
     transporter = nodemailer.createTransport({
       host: `${smtp_host || 'smtp.qq.com'}`,
       port: '465',
