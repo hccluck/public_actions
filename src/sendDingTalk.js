@@ -24,7 +24,8 @@ const sendDingTalk = async (content) => {
 
   let url = `https://oapi.dingtalk.com/robot/send?access_token=${DD_BOT_TOKEN}`;
 
-  if (DD_BOT_TOKEN && DD_BOT_SECRET) url += `&timestamp=${dateNow}&sign=${result}`;
+  // if (DD_BOT_TOKEN && DD_BOT_SECRET) url += `&timestamp=${dateNow}&sign=${result}`;
+  if (DD_BOT_TOKEN) url += `&timestamp=${dateNow}`;
 
   const res = await fetch(url, {
     headers,
