@@ -1,4 +1,4 @@
-const [cookie, user, pass, to, uid] = process.argv.slice(2);
+const { COOKIE, USER, PASS, TO, UID, DD_BOT_TOKEN, DD_BOT_SECRET } = process.env;
 
 const headers = {
   'content-type': 'application/json; charset=utf-8',
@@ -9,7 +9,7 @@ const headers = {
   'sec-ch-ua-mobile': '?0',
   referer: 'https://juejin.cn/',
   accept: '*/*',
-  cookie
+  cookie: COOKIE
 };
 
-module.exports = { headers, user, pass, to, uid };
+module.exports = { headers, user: USER, pass: PASS, to: TO, uid: UID, DD_BOT_TOKEN, DD_BOT_SECRET };
