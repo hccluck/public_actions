@@ -1,4 +1,4 @@
-const { COOKIE, USER, PASS, TO, UID, DD_BOT_TOKEN, DD_BOT_SECRET } = process.env;
+const { COOKIE, USER, PASS, TO, UID, DD_BOT_TOKEN, DD_BOT_SECRET, WORKWX_WEBHOOK } = process.env;
 
 const headers = {
   'content-type': 'application/json; charset=utf-8',
@@ -12,4 +12,4 @@ const headers = {
   cookie: COOKIE
 };
 
-module.exports = { headers, user: USER, pass: PASS, to: TO, uid: UID, DD_BOT_TOKEN, DD_BOT_SECRET };
+module.exports = { headers, user: USER, pass: PASS, to: TO, uid: UID, DD_BOT_TOKEN, DD_BOT_SECRET, WORKWX_WEBHOOK };
