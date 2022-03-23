@@ -89,4 +89,14 @@ const { autoGame } = require('./src/games/autoRun');
   } catch (error) {
     console.error(error);
   }
+
+  try {
+    const html = `掘金自动签到通知\n> 沾喜气结果:<font color=\"comment\">${dip_res}</font>\n> 当前矿石:<font color=\"comment\">${now_score}</font>\n> 较昨日增长:<font color=\"comment\">${now_score - yesterday_score}</font>\n>签到结果:<font color=\"comment\">${sign_res}</font>\n> 抽奖结果:<font color=\"comment\">${draw_res}</font>\n> 游戏结果:<font color=\"comment\">${game_res}</font>`
+
+    const msg = await sendWxWork(html)
+
+    console.log(msg)
+  } catch (error) {
+    console.error(error)
+  }
 })();
