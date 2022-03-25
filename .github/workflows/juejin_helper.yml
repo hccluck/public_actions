@@ -36,4 +36,5 @@ jobs:
           UID: ${{ secrets.UID }}
           DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
           DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
+          WORKWX_WEBHOOK: ${{ secrets.WORKWX_WEBHOOK }}
         run: npm ci && node index.js
