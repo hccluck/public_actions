@@ -7,6 +7,8 @@
 const fetch = require('node-fetch');
 const { headers } = require('./config');
 
+const random = (max, min = 0) => Math.floor(Math.random() * (max - min + 1) + min);
+
 async function dipLucky() {
   const list = await fetch('https://api.juejin.cn/growth_api/v1/lottery_history/global_big', {
     headers,
@@ -15,11 +17,13 @@ async function dipLucky() {
     body: JSON.stringify({ page_no: 1, page_size: 5 })
   }).then((res) => res.json());
 
+  const index = random(list.data.lotteries.length - 1);
+
   const res = await fetch('https://api.juejin.cn/growth_api/v1/lottery_lucky/dip_lucky', {
     headers,
     method: 'POST',
     credentials: 'include',
-    body: JSON.stringify({ lottery_history_id: list.data.lotteries[0].history_id })
+    body: JSON.stringify({ lottery_history_id: list.data.lotteries[index].history_id })
   }).then((res) => res.json());
 
   if (res.err_no !== 0) return Promise.reject('可能是由于cookie导致的网络异常！');
