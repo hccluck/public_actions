@@ -11,7 +11,7 @@ const { autoGame } = require('./src/games/autoRun');
   // 上次分数
   const yesterday_score = await getPoint();
 
-  console.log(`昨日矿石：${yesterday_score}`);
+  console.log(`昨日矿石是：${yesterday_score}`);
 
   let sign_res = '';
 
