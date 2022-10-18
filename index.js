@@ -56,7 +56,7 @@ const { autoGame } = require('./src/games/autoRun');
 
   try {
     const html = `
-      <h1 style="text-align: center">自动签到通知</h1>
+      <h1 style="text-align: center">luckyHao自动签到通知</h1>
       <p style="text-indent: 2em">沾喜气结果：${dip_res}</p>
       <p style="text-indent: 2em">当前矿石：${now_score}</p>
       <p style="text-indent: 2em">较昨日增长：${now_score - yesterday_score}</p>
