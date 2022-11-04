@@ -27,9 +27,6 @@ const sendMail = async (data) => {
       secureConnection: true,
       auth: { user, pass }
     });
-    console.log(transporter, 'transporter');
-
-
   } catch (error) {
     return Promise.reject('邮箱账号密码配置错误！！！');
   }

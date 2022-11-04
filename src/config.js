@@ -1,6 +1,5 @@
 const { COOKIE, USER, PASS, TO, UID, DD_BOT_TOKEN, DD_BOT_SECRET, WORKWX_WEBHOOK } = process.env;
 
-// console.log(process, 'process')
 const headers = {
   'content-type': 'application/json; charset=utf-8',
   'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36',
