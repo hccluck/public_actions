@@ -17,6 +17,7 @@
 | UID | 游戏id `控制台执行( window.__NUXT__.state.auth.user.id )获得` | 否 |
 | DD_BOT_TOKEN | 钉钉机器人token | 否 |
 | DD_BOT_SECRET | 钉钉机器人加签密钥 | 否 |
+| WORKWX_WEBHOOK | 企业微信机器人通知 | 否 |
 
 `注意：掘金的cookie大概有一个月以上的有效期，所以需要定期更新Secret`
 
