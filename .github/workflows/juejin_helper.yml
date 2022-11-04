@@ -1,11 +1,11 @@
 name: JueJin_Helper
 
 on:
-  # push:
-  #   branches:
-  #     - main
+  push:
+    branches:
+      - master
   schedule:
-    - cron: "30 21 * * *" # 该时间为UTC时间，比北京时间晚8个小时，每天早上5点半自动执行
+    - cron: '30 21 * * *' # 该时间为UTC时间，比北京时间晚8个小时，每天早上5点半自动执行
 
   workflow_dispatch:
 
@@ -14,10 +14,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: master
       - uses: actions/setup-node@v1
         with:
-          node-version: 12
-      - run: npm ci
+          node-version: 18
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: ./node_modules
+          key: modules-${{ hashFiles('package-lock.json') }}
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci --ignore-scripts
 
   send:
     runs-on: ubuntu-latest
@@ -25,8 +35,17 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 18
           registry-url: https://npm.pkg.github.com/
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: ./node_modules
+          key: modules-${{ hashFiles('package-lock.json') }}
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci --ignore-scripts
       - name: Run Project
         env:
           COOKIE: ${{ secrets.COOKIE }}
@@ -37,4 +56,4 @@ jobs:
           DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
           DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
           WORKWX_WEBHOOK: ${{ secrets.WORKWX_WEBHOOK }}
-        run: npm ci && node index.js
+        run: node index.js
