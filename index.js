@@ -45,9 +45,9 @@ const getPoint = require('./src/getPoint');
 
   console.log(`当前矿石：${now_score}`);
 
-  let dip_res;
+  let dip_res = '';
   try {
-    dip_res = await dipLucky();
+    // dip_res = await dipLucky();
   } catch (error) {
     dip_res = error;
   }
